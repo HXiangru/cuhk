@@ -33,31 +33,31 @@ def read_fasta(filename):
 
 # Splits the genome into fixed-size bins and calculates GC content
 def split_genome_into_bins(genome, num_bins=1000000):
-    gc_results = []
+    GC_results = []
     for chrom, seq in genome.items():
         bin_size = math.ceil(len(seq) / num_bins)
         for i in range(0, len(seq), bin_size):
             bin_seq = seq[i:i + bin_size]
-            gc_content = calculate_gc_content(bin_seq)
-            gc_results.append((chrom, i, min(i + bin_size, len(seq)), gc_content))  
-    return gc_results
+            GC_content = calculate_GC_content(bin_seq)
+            GC_results.append((chrom, i, min(i + bin_size, len(seq)), GC_content))  
+    return GC_results
 
 # Calculates the GC content (%) of a given DNA sequence
-def calculate_gc_content(sequence):
-    gc_count = sum(1 for base in sequence if base in "GC")  
-    return (gc_count / len(sequence) * 100) if sequence else 0  
+def calculate_GC_content(sequence):
+    GC_count = sum(1 for base in sequence if base in "GC")  
+    return (GC_count / len(sequence) * 100) if sequence else 0  
 
 # Counts the number of bins with GC content <30% and >60%
-def count_gc_thresholds(gc_results, low=30, high=60):
-    low_count = sum(gc < low for _, _, _, gc in gc_results)
-    high_count = sum(gc > high for _, _, _, gc in gc_results)
+def count_GC_thresholds(GC_results, low=30, high=60):
+    low_count = sum(GC < low for _, _, _, GC in GC_results)
+    high_count = sum(GC > high for _, _, _, GC in GC_results)
     return low_count, high_count
 
 # Writes GC content results to a BED format file
-def write_bed_file(gc_results, output_file):
+def write_bed_file(GC_results, output_file):
     with open(output_file, 'w') as f:
         f.write("chrom\tstart\tend\tGC_content\n")
-        f.writelines(f"{chrom}\t{start}\t{end}\t{gc:.2f}\n" for chrom, start, end, gc in gc_results)  
+        f.writelines(f"{chrom}\t{start}\t{end}\t{GC:.2f}\n" for chrom, start, end, GC in GC_results)  
 
 # File paths
 base_path = "/home/xh368/rds/rds-huang_xr-CGClDViiOBk/cuhk/"
@@ -67,18 +67,31 @@ output_txt = f"{base_path}gc_content_stats.txt"
 
 # Process genome
 genome = read_fasta(fasta_file)
-gc_results = split_genome_into_bins(genome)
-write_bed_file(gc_results, output_bed)
-low_gc, high_gc = count_gc_thresholds(gc_results)
+GC_results = split_genome_into_bins(genome)
+write_bed_file(GC_results, output_bed)
+low_GC, high_GC = count_GC_thresholds(GC_results)
 
 # Writing GC threshold results to file
 with open(output_txt, 'w') as f:
-    f.write(f"GC content <30% bins: {low_gc}\nGC content >60% bins: {high_gc}\n")
+    f.write(f"GC content <30% bins: {low_GC}\nGC content >60% bins: {high_GC}\n")
 
 print("Processing complete. Results saved in:")
 print(f"  - BED file: {output_bed}")
 print(f"  - GC statistics: {output_txt}")
 ```
+
+### Task 1 output
+
+#### A bed file with chromosome, chromosomeStart, chromosomeEnd, and GC content information
+<a target="_blank" href="./path/to/your/file.txt">GC_content.bed</a>
+
+#### GC content
+```txt
+GC content <30% bins: 75463775
+GC content >60% bins: 14990524
+```
+
+---
 
 ### Task 2
 
@@ -116,6 +129,8 @@ generate_reverse_complement(fasta_file, output_fasta)
 
 print(f"Reverse complement genome saved to: {output_fasta}")
 ```
+
+---
 
 ### Task 3
 
@@ -162,6 +177,12 @@ count_4mer_frequencies(fasta_file, output_txt)
 
 print(f"4-mer frequency analysis saved to: {output_txt}")
 ```
+
+### Task 3 output
+#### Frequencies of 4-mer motifs
+<a target="_blank" href="./path/to/your/file.txt">4mer_frequencies.txt</a>
+
+---
 
 ### Task 4
 
@@ -211,4 +232,12 @@ output_txt = "/home/xh368/rds/rds-huang_xr-CGClDViiOBk/cuhk/CG_dinucleotide_stat
 count_CG_dinucleotides(fasta_file, output_txt)
 
 print(f"CG dinucleotide statistics saved to: {output_txt}")
+```
+
+###  Task 4 output
+#### CG dinucleotide
+```txt
+Total dinucleotides: 3209285650
+CG dinucleotide count: 14319375
+CG percentage: 0.45%
 ```
