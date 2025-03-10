@@ -180,7 +180,7 @@ print(f"4-mer frequency analysis saved to: {output_txt}")
 
 ### Task 3 output
 #### Frequencies of 4-mer motifs
-<a target="_blank" href="./path/to/your/file.txt">4mer_frequencies.txt</a>
+<a target="_blank" href="https://github.com/HXiangru/cuhk/blob/main/4mer_frequencies.txt">4mer_frequencies.txt</a>
 
 ---
 
