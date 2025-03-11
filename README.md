@@ -62,8 +62,8 @@ def write_bed_file(GC_results, output_file):
 # File paths
 base_path = "/home/xh368/rds/rds-huang_xr-CGClDViiOBk/cuhk/"
 fasta_file = f"{base_path}hg38.fa"
-output_bed = f"{base_path}gc_content.bed"
-output_txt = f"{base_path}gc_content_stats.txt"
+output_bed = f"{base_path}GC_content.bed"
+output_txt = f"{base_path}GC_content_stats.txt"
 
 # Process genome
 genome = read_fasta(fasta_file)
