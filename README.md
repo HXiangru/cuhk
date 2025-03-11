@@ -83,7 +83,7 @@ print(f"  - GC statistics: {output_txt}")
 ### Task 1 output
 
 #### A bed file with chromosome, chromosomeStart, chromosomeEnd, and GC content information
-<a target="_blank" href="./path/to/your/file.txt">GC_content.bed</a>
+<a target="_blank" href="https://drive.google.com/file/d/16yYDktRRTTl7MGGXW0iNE5vsCKYSvaoT/view?usp=sharing">GC_content.bed</a>
 
 #### GC content
 ```txt
